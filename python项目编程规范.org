@@ -1,0 +1,204 @@
+#+startup: overview
+#+options: ^:nil
+#+title: Python项目编程规范
+#+author: Yizhe WANG
+
+* 目录规范
+- code (或同名于项目名称) :: 存储项目代码
+- tests :: 存储单元测试
+- binder :: 存储项目依赖
+- docs :: 存储项目文档
+* 文档规范
+** UML程序架构图                                                   :noexport:
+** 接口文档
+接口文档应包含如下内容：
+1. 接口功能简述
+2. 接口调用方式
+3. 接口输入示例
+4. 接口输出示例
+** 环境依赖文档
+1. python版本
+2. requirements.txt
+3. 其他依赖
+** 使用说明
+1. 安装文档
+2. 运行文档
+* 代码规范
+** 命名规范
+|-------------------+--------------------+---------------------|
+| 类型              | 公有               | 内部                |
+|-------------------+--------------------+---------------------|
+| 包                | lower_with_under   |                     |
+| 模块              | lower_with_under   | _lower_with_under   |
+| 类                | CapWords           | _CapWords           |
+| 异常              | CapWords           |                     |
+| 函数              | lower_with_under() | _lower_with_under() |
+| 全局常量/类常量   | CAPS_WITH_UNDER    | _CAPS_WITH_UNDER    |
+| 全局变量/类变量   | lower_with_under   | _lower_with_under   |
+| 实例变量          | lower_with_under   | _lower_with_under   |
+| 方法名            | lower_with_under() | _lower_with_under() |
+| 函数参数/方法参数 | lower_with_under   |                     |
+| 局部变量          | lower_with_under   |                     |
+|-------------------+--------------------+---------------------|
+
+** 风格规范
+使用[[https://docs.astral.sh/ruff/][ruff]]对代码同时进行静态检查与格式化，该工具集成了代码检查工具flake8与代码格式化工具black。
+该工具支持超过700条代码书写[[https://docs.astral.sh/ruff/rules/][规则]]，例如：
+1. 包的导入放于代码顶部；
+2. 一行代码长度过长时应换行；
+3. 每个public函数应有注释，包括功能概述与输入输出说明。
+** 类型提示规范
+1. 使用[[https://docs.python.org/zh-cn/3/library/typing.html][typing]]模块编写类型提示。
+2. 使用[[https://mypy.readthedocs.io/en/stable/][mypy]]插件自动检查类型。
+* 日志规范
+使用[[https://docs.python.org/zh-cn/3/library/logging.html][logging]]模块输出运行日志
+** 创建Logger
+#+begin_src python
+logger = logging.getLogger(__name__)
+logging.basicConfig( # 配置日志记录工具
+    stream=sys.stdout, # 设置日志输出方式为标准输出
+    level=logging.DEBUG, # 设置日志输出等级为DEBUG
+    format="[%(asctime)s] - %(filename)s:%(lineno)d - %(levelname)s - %(message)s",
+)
+#+end_src
+** 日志格式
+** 日志输出
+1. 在每个功能的开头使用logger.info()记录功能开始，并在结尾处使用logger.info()记录功能完成
+2. 使用logger.debug()输出调试数据
+* 单元测试
+使用[[https://docs.pytest.org/en/7.1.x/contents.html][pytest]]模块为每个功能编写单元测试
+1. 创建context.py以将项目代码引入测试程序中
+* 版本管理
+使用[[https://www.runoob.com/git/git-tutorial.html][Git]]管理项目版本
+** Git基本操作
+1. 拉取远程代码到本地
+   #+begin_src sh
+   git pull
+   #+end_src
+2. 提交代码到本地
+   #+begin_src sh
+   git commit -m "message about changes"
+   #+end_src
+3. 提交本地代码到远程
+   #+begin_src sh
+   git push
+   #+end_src
+** Commit格式规范
+1. Commit书写格式如下：
+   #+begin_src
+   Commit类型: 简述
+   
+   具体描述(可选项)
+   #+end_src
+2. Commit类型应为下列之一:
+   - feat :: 引入的新特性
+   - fix :: bug修复
+   - chore :: 非bug修复或新特性引入的修改，且不涉及源码与测试，如依赖更新等
+   - refactor :: 非bug修复或新特性引入的源码重构
+   - docs :: 更新文档，如README等
+   - style :: 不改变源码含义的修改，如加入空格、分号的代码格式调整等
+   - test :: 添加新测试或修正已有测试
+   - perf :: 优化性能
+   - tool :: 部署或开发工具，如部署脚本、启动脚本等
+   - ci :: 持续集成相关
+   - build :: 影响项目构建或外部依赖的修改
+   - revert :: 撤销之前的commit
+3. Commit示例
+   #+begin_src
+   Commit类型: 简述
+   fix: fix foo to enable bar
+   
+   This fixes the broken behavior of the component by doing xyz. 
+   #+end_src
+* Tabular data processing                                          :noexport:
+1. using 'pandas'
+* Scientific calculating                                           :noexport:
+1. primarily using 'numpy'
+2. using 'torch' for GPU acceleration
+* Concurrent programming                                           :noexport:
+1. primarily using the Executor class from 'concurrent.futures' for thread or process concurrency
+* UML设计                                                          :noexport:
+1. using 'plantuml'
+** Class
+1. using '_' prefix for internal member functions
+** Component
+1. putting everything into a single module
+** Server
+1. using 'flask' with uWSGI
+2. using BluePrint for unit server
+** Script
+1. using 'argparse'
+* Concurrent and Parallel Programming                              :noexport:
+
+|-----------------------+-----------------------------------------------------------------------------------|
+| Name                  | Characteristic                                                                    |
+|-----------------------+-----------------------------------------------------------------------------------|
+| Pool.apply()          | 1. Issues a single task to the process pool.                                      |
+|                       | 2. Supports multiple arguments to the target function.                            |
+|                       | 3. Blocks until the call to the target function is complete.                      |
+|-----------------------+-----------------------------------------------------------------------------------|
+| Pool.apply_async()    | 1. Issues a single task to the process pool.                                      |
+|                       | 2. Supports multiple arguments to the target function.                            |
+|                       | 3. Does not block, instead returns a AsyncResult.                                 |
+|                       | 4. Supports callback for the return value and any raised errors.                  |
+|-----------------------+-----------------------------------------------------------------------------------|
+| Pool.map()            | 1. Issue multiple tasks to the process pool all at once.                          |
+|                       | 2. Returns an iterable over return values.                                        |
+|                       | 3. Supports a single argument to the target function.                             |
+|                       | 4. Blocks until all issued tasks are completed.                                   |
+|                       | 5. Allows tasks to be grouped and executed in batches by workers.                 |
+|-----------------------+-----------------------------------------------------------------------------------|
+| Pool.map_async()      | 1. Issue multiple tasks to the process pool all at once.                          |
+|                       | 2. Supports a single argument to the target function.                             |
+|                       | 3. Does not not block, instead returns a AsyncResult for accessing results later. |
+|                       | 4. Allows tasks to be grouped and executed in batches by workers.                 |
+|                       | 5. Supports callback for the return value and any raised errors.                  |
+|-----------------------+-----------------------------------------------------------------------------------|
+| Pool.imap()           | 1. Issue multiple tasks to the process pool, one-by-one.                          |
+|                       | 2. Returns an iterable over return values.                                        |
+|                       | 3. Supports a single argument to the target function.                             |
+|                       | 4. Blocks until each task is completed in order they were issued.                 |
+|                       | 5. Allows tasks to be grouped and executed in batches by workers.                 |
+|-----------------------+-----------------------------------------------------------------------------------|
+| Pool.imap_unordered() | 1. Issue multiple tasks to the process pool, one-by-one.                          |
+|                       | 2. Returns an iterable over return values.                                        |
+|                       | 3. Supports a single argument to the target function.                             |
+|                       | 4. Blocks until each task is completed in the order they are completed.           |
+|                       | 5. Allows tasks to be grouped and executed in batches by workers.                 |
+|-----------------------+-----------------------------------------------------------------------------------|
+| Pool.starmap()        | 1. Issue multiple tasks to the process pool all at once.                          |
+|                       | 2. Returns an iterable over return values.                                        |
+|                       | 3. Supports multiple arguments to the target function.                            |
+|                       | 4. Blocks until all issued tasks are completed.                                   |
+|                       | 5. Allows tasks to be grouped and executed in batches by workers.                 |
+|-----------------------+-----------------------------------------------------------------------------------|
+| Pool.starmap_async()  | 1. Issue multiple tasks to the process pool all at once.                          |
+|                       | 2. Supports multiple arguments to the target function.                            |
+|                       | 3. Does not not block, instead returns a AsyncResult for accessing results later. |
+|                       | 4. Allows tasks to be grouped and executed in batches by workers.                 |
+|                       | 5. Supports callback for the return value and any raised errors.                  |
+|-----------------------+-----------------------------------------------------------------------------------|
+
+
+|-----------------------+------------+----------+-------------+--------+-----------+-----------------+-----------|
+| Name                  | Multi-Task | Blocking | All at Once | No Arg | Multi-Arg | Ordered Results | Callbacks |
+|-----------------------+------------+----------+-------------+--------+-----------+-----------------+-----------|
+| Pool.apply()          | NO         | YES      |             | YES    | YES       | YES             |           |
+|-----------------------+------------+----------+-------------+--------+-----------+-----------------+-----------|
+| Pool.apply_async()    | NO         | NO       |             | YES    | YES       | YES             |           |
+|-----------------------+------------+----------+-------------+--------+-----------+-----------------+-----------|
+| Pool.map()            | YES        | YES      | YES         | NO     | NO        | YES             |           |
+|-----------------------+------------+----------+-------------+--------+-----------+-----------------+-----------|
+| Pool.map_async()      | YES        | NO       | YES         | NO     | NO        | YES             |           |
+|-----------------------+------------+----------+-------------+--------+-----------+-----------------+-----------|
+| Pool.imap()           | YES        | NO       | NO          | NO     | NO        | YES             |           |
+|-----------------------+------------+----------+-------------+--------+-----------+-----------------+-----------|
+| Pool.imap_unordered() | YES        | NO       | NO          | NO     | NO        | NO              |           |
+|-----------------------+------------+----------+-------------+--------+-----------+-----------------+-----------|
+| Pool.starmap()        | YES        | YES      | YES         | NO     | YES       | YES             |           |
+|-----------------------+------------+----------+-------------+--------+-----------+-----------------+-----------|
+| Pool.starmap_async()  | YES        | NO       | YES         | NO     | YES       | YES             |           |
+|-----------------------+------------+----------+-------------+--------+-----------+-----------------+-----------|
+
+* Materials                                                        :noexport:
+1. [[https://ebook-python-study.readthedocs.io/zh-cn/latest/index.html][python进阶教程]]
