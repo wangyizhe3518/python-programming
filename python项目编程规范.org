@@ -54,6 +54,8 @@
 使用[[https://docs.python.org/zh-cn/3/library/logging.html][logging]]模块输出运行日志
 ** 创建Logger
 #+begin_src python
+import logging
+
 logger = logging.getLogger(__name__)
 logging.basicConfig( # 配置日志记录工具
     stream=sys.stdout, # 设置日志输出方式为标准输出

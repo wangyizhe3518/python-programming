@@ -1,27 +1,27 @@
 
 # Table of Contents
 
-1.  [目录规范](#org666efbe)
-2.  [文档规范](#org012cd9b)
-    1.  [接口文档](#org15169da)
-    2.  [环境依赖文档](#orgbe2d996)
-    3.  [使用说明](#org8a1a20a)
-3.  [代码规范](#orgdde7b84)
-    1.  [命名规范](#org481e9a7)
-    2.  [风格规范](#orgba5e2c1)
-    3.  [类型提示规范](#org6156a11)
-4.  [日志规范](#orgeb8aa3d)
-    1.  [创建Logger](#orga848aef)
-    2.  [日志格式](#org2514c8f)
-    3.  [日志输出](#orgae04f3d)
-5.  [单元测试](#orge21b8e7)
-6.  [版本管理](#org08285a4)
-    1.  [Git基本操作](#org8adfbbe)
-    2.  [Commit格式规范](#orge19f06c)
+1.  [目录规范](#org5338c0c)
+2.  [文档规范](#orgdd19877)
+    1.  [接口文档](#orgd41033f)
+    2.  [环境依赖文档](#org4289e0e)
+    3.  [使用说明](#org6029a2c)
+3.  [代码规范](#org1a9a4a4)
+    1.  [命名规范](#orgd0f8af4)
+    2.  [风格规范](#org7a212bb)
+    3.  [类型提示规范](#orgc740952)
+4.  [日志规范](#org136a7b6)
+    1.  [创建Logger](#orgb8eacf3)
+    2.  [日志格式](#org820e7d9)
+    3.  [日志输出](#org3ce99db)
+5.  [单元测试](#orgfd9d9f1)
+6.  [版本管理](#orgaed1ed3)
+    1.  [Git基本操作](#org5994e97)
+    2.  [Commit格式规范](#orge6a5fc4)
 
 
 
-<a id="org666efbe"></a>
+<a id="org5338c0c"></a>
 
 # 目录规范
 
@@ -31,12 +31,12 @@
 -   **docs:** 存储项目文档
 
 
-<a id="org012cd9b"></a>
+<a id="orgdd19877"></a>
 
 # 文档规范
 
 
-<a id="org15169da"></a>
+<a id="orgd41033f"></a>
 
 ## 接口文档
 
@@ -48,7 +48,7 @@
 4.  接口输出示例
 
 
-<a id="orgbe2d996"></a>
+<a id="org4289e0e"></a>
 
 ## 环境依赖文档
 
@@ -57,7 +57,7 @@
 3.  其他依赖
 
 
-<a id="org8a1a20a"></a>
+<a id="org6029a2c"></a>
 
 ## 使用说明
 
@@ -65,12 +65,12 @@
 2.  运行文档
 
 
-<a id="orgdde7b84"></a>
+<a id="org1a9a4a4"></a>
 
 # 代码规范
 
 
-<a id="org481e9a7"></a>
+<a id="orgd0f8af4"></a>
 
 ## 命名规范
 
@@ -172,7 +172,7 @@
 </table>
 
 
-<a id="orgba5e2c1"></a>
+<a id="org7a212bb"></a>
 
 ## 风格规范
 
@@ -184,7 +184,7 @@
 3.  每个public函数应有注释，包括功能概述与输入输出说明。
 
 
-<a id="org6156a11"></a>
+<a id="orgc740952"></a>
 
 ## 类型提示规范
 
@@ -192,17 +192,19 @@
 2.  使用[mypy](https://mypy.readthedocs.io/en/stable/)插件自动检查类型。
 
 
-<a id="orgeb8aa3d"></a>
+<a id="org136a7b6"></a>
 
 # 日志规范
 
 使用[logging](https://docs.python.org/zh-cn/3/library/logging.html)模块输出运行日志
 
 
-<a id="orga848aef"></a>
+<a id="orgb8eacf3"></a>
 
 ## 创建Logger
 
+    import logging
+    
     logger = logging.getLogger(__name__)
     logging.basicConfig( # 配置日志记录工具
         stream=sys.stdout, # 设置日志输出方式为标准输出
@@ -211,12 +213,12 @@
     )
 
 
-<a id="org2514c8f"></a>
+<a id="org820e7d9"></a>
 
 ## 日志格式
 
 
-<a id="orgae04f3d"></a>
+<a id="org3ce99db"></a>
 
 ## 日志输出
 
@@ -224,7 +226,7 @@
 2.  使用logger.debug()输出调试数据
 
 
-<a id="orge21b8e7"></a>
+<a id="orgfd9d9f1"></a>
 
 # 单元测试
 
@@ -233,14 +235,14 @@
 1.  创建context.py以将项目代码引入测试程序中
 
 
-<a id="org08285a4"></a>
+<a id="orgaed1ed3"></a>
 
 # 版本管理
 
 使用[Git](https://www.runoob.com/git/git-tutorial.html)管理项目版本
 
 
-<a id="org8adfbbe"></a>
+<a id="org5994e97"></a>
 
 ## Git基本操作
 
@@ -255,7 +257,7 @@
         git push
 
 
-<a id="orge19f06c"></a>
+<a id="orge6a5fc4"></a>
 
 ## Commit格式规范
 
