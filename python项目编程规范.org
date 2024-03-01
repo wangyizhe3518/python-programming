@@ -204,3 +204,4 @@ logging.basicConfig( # 配置日志记录工具
 
 * Materials                                                        :noexport:
 1. [[https://ebook-python-study.readthedocs.io/zh-cn/latest/index.html][python进阶教程]]
+2. [[https://google.github.io/styleguide/pyguide.html][Google Python Style Guide]]
